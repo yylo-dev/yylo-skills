@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate repository contract
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const expected = ['kanban-workflow', 'plan-kanban-tasks', 'ralph-loop', 'understand-project'];
+          const actual = fs.readdirSync('skills', { withFileTypes: true })
+            .filter((entry) => entry.isDirectory())
+            .map((entry) => entry.name)
+            .sort();
+          if (JSON.stringify(actual) !== JSON.stringify(expected)) {
+            throw new Error(`unexpected skills: ${actual.join(', ')}`);
+          }
+          const config = JSON.parse(fs.readFileSync('skills.sh.json', 'utf8'));
+          if (config.$schema !== 'https://skills.sh/schemas/skills.sh.schema.json') {
+            throw new Error('skills.sh.json schema identity is missing');
+          }
+          const grouped = config.groupings.flatMap((group) => group.skills).sort();
+          if (JSON.stringify(grouped) !== JSON.stringify(expected)) {
+            throw new Error(`skills.sh.json does not group exactly the shipped skills: ${grouped.join(', ')}`);
+          }
+          for (const slug of expected) {
+            const skill = fs.readFileSync(`skills/${slug}/SKILL.md`, 'utf8');
+            if (!skill.startsWith('---\n') || !skill.includes(`\nname: ${slug}\n`)) {
+              throw new Error(`invalid frontmatter identity for ${slug}`);
+            }
+            if (!fs.existsSync(`skills/${slug}/README.md`)) {
+              throw new Error(`missing README for ${slug}`);
+            }
+          }
+          NODE
+      - name: Verify skills CLI discovery
+        run: npx --yes skills add . --list

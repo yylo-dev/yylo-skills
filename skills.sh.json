@@ -1,0 +1,28 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Task Management",
+      "description": "Skills for managing work with YYLO Ledger.",
+      "skills": [
+        "kanban-workflow"
+      ]
+    },
+    {
+      "title": "Planning",
+      "description": "Skills for understanding projects and planning implementation work.",
+      "skills": [
+        "understand-project",
+        "plan-kanban-tasks"
+      ]
+    },
+    {
+      "title": "Execution",
+      "description": "Skills for validated task-driven delivery.",
+      "skills": [
+        "ralph-loop"
+      ]
+    }
+  ]
+}
