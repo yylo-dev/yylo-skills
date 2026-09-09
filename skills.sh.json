@@ -3,25 +3,28 @@
   "notGrouped": "bottom",
   "groupings": [
     {
-      "title": "Task Management",
-      "description": "Skills for managing work with YYLO Ledger.",
+      "title": "Ledger Records",
+      "description": "Skills for working with YYLO Ledger as the source of truth.",
       "skills": [
-        "kanban-workflow"
+        "ledger-tasks-yylo",
+        "wiki-yylo",
+        "workflow-yylo",
+        "artifact-yylo"
       ]
     },
     {
       "title": "Planning",
-      "description": "Skills for understanding projects and planning implementation work.",
+      "description": "Skills for understanding projects and planning Ledger work.",
       "skills": [
-        "understand-project",
-        "plan-kanban-tasks"
+        "understand-project-yylo",
+        "plan-ledger-tasks-yylo"
       ]
     },
     {
       "title": "Execution",
-      "description": "Skills for validated task-driven delivery.",
+      "description": "Skills for bounded task-driven delivery.",
       "skills": [
-        "ralph-loop"
+        "ralph-loop-yylo"
       ]
     }
   ]

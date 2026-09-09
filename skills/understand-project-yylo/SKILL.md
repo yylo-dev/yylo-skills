@@ -1,5 +1,5 @@
 ---
-name: understand-project
+name: understand-project-yylo
 description: Inspect the current product architecture, dependencies, and validation loops before planning or implementing a requested change.
 argument-hint: "[Main Task] [Constraints] [Ultimate Goal]"
 enable-shell-directives: true
@@ -11,7 +11,7 @@ enable-shell-directives: true
 2. Read related Kanban tasks and durable specs through the canonical metadata controller. Do not assume `.juno_task/plan.md` exists and do not materialize controller-private metadata in a product worktree.
 3. Trace only the dependencies and runtime paths needed for the requested goal. Use bounded parallel investigation when independent questions justify it.
 4. Report current behavior, sources of truth, affected components, risks, unknowns, and the smallest useful validation loop.
-5. If the user requested planning, hand the findings to `plan-kanban-tasks`. If implementation was requested, work only in the task worktree returned by `yy task start TASK_ID`.
+5. If the user requested planning, hand the findings to `plan-ledger-tasks-yylo`. If implementation was requested, work only in the task worktree returned by `yy task start TASK_ID`.
 6. Write a durable spec only when requested or materially useful, and route it to a controller-admitted location. Do not update root instructions with transient status.
 
 ## Invocation contract

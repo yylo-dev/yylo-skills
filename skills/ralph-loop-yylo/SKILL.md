@@ -1,6 +1,6 @@
 ---
-name: ralph-loop
-description: Execute exactly one explicitly assigned Kanban task to a validated queued commit. Use only when the user explicitly requests ralph-loop.
+name: ralph-loop-yylo
+description: Execute exactly one explicitly assigned YYLO Ledger task through the Ralph loop to a validated queued commit. Use only when the user explicitly requests ralph-loop-yylo.
 ---
 
 Read [references/implement.md](references/implement.md) completely and follow it.

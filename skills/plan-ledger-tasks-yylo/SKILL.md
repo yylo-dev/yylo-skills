@@ -1,6 +1,6 @@
 ---
-name: plan-kanban-tasks
-description: Create a concise Product Development Requirement and one or more implementation-sized Kanban tasks when the user explicitly asks to plan or register work.
+name: plan-ledger-tasks-yylo
+description: Create a concise Product Development Requirement and one or more implementation-sized YYLO Ledger tasks when the user explicitly asks to plan or register work.
 argument-hint: "[Required Features] [Constraints] [Acceptance Criteria]"
 enable-shell-directives: true
 ---

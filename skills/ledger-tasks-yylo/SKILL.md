@@ -1,5 +1,5 @@
 ---
-name: kanban-workflow
+name: ledger-tasks-yylo
 description: Comprehensive guide for using YYLO Ledger task management. Covers all commands (create, list, search, get, mark, update, archive, deps, ready, order, merge), dependency management, best practices, and workflow patterns. Use when you need to interact with the YYLO Ledger board.
 argument-hint: "[command or workflow question]"
 enable-shell-directives: true
