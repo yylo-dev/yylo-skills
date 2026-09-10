@@ -3,6 +3,7 @@
 Reusable agent skills maintained by [YYLO](https://yylo.dev). This repository is the canonical, independently versioned source for skills used by YYLO CLI and YYLO Ledger.
 
 [![skills.sh](https://skills.sh/b/yylo-dev/yylo-skills)](https://skills.sh/yylo-dev/yylo-skills)
+[![Mentioned in Claude Skill Registry](https://awesome.re/mentioned-badge.svg)](https://github.com/majiayu000/claude-skill-registry)
 
 ## Install
 
