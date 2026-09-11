@@ -5,6 +5,7 @@ Reusable agent skills maintained by [YYLO](https://yylo.dev). This repository is
 [![skills.sh](https://skills.sh/b/yylo-dev/yylo-skills)](https://skills.sh/yylo-dev/yylo-skills)
 [![Mentioned in Claude Skill Registry](https://awesome.re/mentioned-badge.svg)](https://github.com/majiayu000/claude-skill-registry)
 [![Mentioned in Agent Skill Exchange](https://awesome.re/mentioned-badge.svg)](https://github.com/agentskillexchange/skills)
+[![Mentioned in GAIA Skill Tree](https://awesome.re/mentioned-badge.svg)](https://github.com/gaia-research/gaia-skill-tree/blob/main/registry/named/yylo-dev/ledger-tasks-yylo.md)
 
 ## Install
 
