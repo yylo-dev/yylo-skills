@@ -26,12 +26,13 @@ task's workspace.
 1. Edit only requested product paths and preserve project sources of truth.
 2. Use focused affected tests in the edit loop. Other feature worktrees may run
    concurrently; do not wait for or modify them.
-3. Never launch lifecycle-semantic reviewers.
-   The managed merge queue is the sole lifecycle-semantic review owner. Candidate
-   review is risk-based: low gets zero,
-   normal gets at most one, and high gets exactly Reviewer A then Reviewer B on
-   one frozen candidate.
+3. Do not launch lifecycle-semantic reviewers from implementation. Semantic
+   review and project checks are explicit owner operations outside native task
+   delivery; never claim they occurred because a task was queued.
 4. If blocked, record bounded truthful state and stop without claiming success.
+   Durable diagnostic output belongs in a verified Ledger Artifact Record when
+   the installed API supports it; otherwise preserve an external draft and stop,
+   never fall back to product documentation or direct controller-store edits.
 
 ## 3. Queue and hand off
 
@@ -47,14 +48,11 @@ task's workspace.
    attempt a controller checkpoint after terminal metadata is durable; checkpoint
    failure remains a warning and must not change the task or merge outcome.
 
-Stop after queueing. Read-only delivery observation uses `yy merge status` or
-`yy merge arbiter status`. One fenced target owner runs `yy merge arbiter run`
-(or typed `yy merge drive`) through the expected-SHA CAS gate and exits when idle
-or blocked; implementation agents
-do not poll, steal on timeout, discard dirty bytes, or invoke `next|resolve`
-except under explicit recovery authority. The merge owner applies the bounded
-risk-based review sequence and permits at most one repair candidate. A second
-material finding terminalizes as `REVIEW_FINDINGS_EXHAUSTED`.
+Stop after queueing. Read-only delivery observation uses `yy merge status`.
+Only the target owner runs `yy merge land TASK_ID`, which uses native Git and an
+expected-old ref update. If Git integration succeeded but Ledger projection did
+not, recover only with `yy merge project TASK_ID`. Implementation agents do not
+poll, steal authority, discard dirty bytes, or mutate the target.
 
 Release-version changes use this same ordinary task/merge lifecycle. Package
 preparation is maintainer-only and outside `yy`. Never create a tag, push,

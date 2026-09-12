@@ -51,6 +51,22 @@ session, run, invocation, task, or workflow identity. Task/workflow provenance
 uses immutable Record IDs. Select `temporary`, `standard`, or `permanent`
 retention deliberately; retention metadata does not itself authorize deletion.
 
+## Operational-document boundary
+
+Store new PDRs, architecture and migration contracts, plans, reports, receipts,
+and execution evidence as Artifact Records. Draft through a fresh external file,
+capture it with an intentional profile and immutable payload mode, read it back,
+and verify its ID, digest, size, provenance, retention, and history before
+removing the draft. Use the `report` profile for human-readable PDRs/contracts
+unless installed help provides a more specific approved profile.
+
+Product `docs/` is only for documentation shipped as part of the product. Never
+put operational evidence there to manufacture a task product diff. Preserve
+legacy `.juno_task/specs` files, but do not create new ones as a fallback. If the
+installed artifact API is unavailable, stop with the external draft intact and
+request a Ledger upgrade; do not put it in task bodies, responses, product docs,
+or manually managed controller paths.
+
 ## Find and verify
 
 ```bash
