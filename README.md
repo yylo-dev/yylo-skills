@@ -31,6 +31,16 @@ Install one skill by user-intent-first name:
 npx skills add yylo-dev/yylo-skills --skill wiki-yylo
 ```
 
+Remove installed skills the same way — interactively, or by canonical slug:
+
+```bash
+npx skills remove
+```
+
+```bash
+npx skills remove wiki-yylo
+```
+
 Every canonical slug ends in `-yylo`, keeping selector prefixes useful: type `w` for wiki/workflow, `a` for artifacts, `p` for planning, `r` for the Ralph loop, or `u` for project understanding. Review skill instructions and scripts before installing them. Published versions use immutable `vMAJOR.MINOR.PATCH` tags; `VERSION` identifies the repository release represented by the default branch.
 
 ## Native delivery and compatible CLI installation
