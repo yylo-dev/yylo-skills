@@ -1,15 +1,16 @@
-# `benchmark-yylo`
+# benchmark-yylo
 
-Plan historical-task model studies with YYLO Benchmark, validate exact-shape setup,
-run a gated pilot through the canonical harness, and save honest per-task Ledger
-evidence. Requests for a `yylo-benchmark` skill use this canonical `-yylo` name.
+Prepare reviewed historical-task, prompt and workflow cases; compare models,
+harnesses and configurations; independently evaluate retained outputs using
+YYLO Benchmark 0.2.0's thin trusted-host runner.
 
-Requires independently installed YYLO Benchmark and the relevant Ledger APIs.
-Source availability is not installation, account access, execution or publication
-authority. This skill is guidance, not a validated configuration for every host.
+Read [SKILL.md](SKILL.md) and the [historical preparation guide](references/historical-tasks.md).
+The lifecycle is case -> run -> evaluate -> report, plus append-only disqualify.
+Workflow step comparisons measure prefixes, not isolated steps. Execution, checks,
+judge opinions and errors remain separate; there is no automatic winner.
 
-After a compatible immutable skills release includes this skill:
-
-```bash
-npx skills add yylo-dev/yylo-skills --skill benchmark-yylo
-```
+Inspect installed help/version first. Skills 2.1.0 and Benchmark 0.2.0 source changes
+do not imply a published release or installed upgrade. No security sandbox,
+automatic repair, session translation or mandatory pilot ceremony is promised.
+Study-specific approval gates still apply. Publication and live provider calls
+require separate authority.

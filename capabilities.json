@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packageId": "yylo-skills",
-  "sourceVersion": "2.0.4",
+  "sourceVersion": "2.1.0",
   "evidenceDate": "2026-09-14",
   "prerequisites": "Review the canonical skill instructions. Use the open Skills CLI, compatible YYLO CLI, or standalone Ledger installer.",
   "releases": [
@@ -13,6 +13,19 @@
     }
   ],
   "capabilities": [
+    {
+      "id": "benchmark-thin-runner",
+      "title": "Benchmark experiments with independent assessments",
+      "summary": "The eighth canonical skill prepares reviewed cases and compares models, harnesses and configurations using Benchmark 0.2.0.",
+      "details": [
+        "Case, run, evaluate, report and append-only disqualify replace the old Benchmark lifecycle. Workflow comparisons measure prefixes; new judges assess retained outputs without candidate reruns.",
+        "Trusted-host workspace hygiene is not a sandbox. Harnesses own sessions, dependencies and errors; study-specific pilot gates are not mandatory runner ceremony."
+      ],
+      "commands": ["yylo-benchmark --version\nyylo-benchmark --help"],
+      "boundary": "Unreleased 2.1.0 source guidance does not publish, install or activate Benchmark or skills. Historical release evidence below remains unchanged.",
+      "sourceFiles": ["skills/benchmark-yylo/SKILL.md", "skills/benchmark-yylo/references/historical-tasks.md"],
+      "verifiedReleases": []
+    },
     {
       "id": "catalog",
       "title": "Seven procedures, three groups",

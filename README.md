@@ -35,9 +35,17 @@ Every canonical slug ends in `-yylo`, keeping selector prefixes useful: type `w`
 
 ## Native delivery and compatible CLI installation
 
-Version 2.0.4 adds `benchmark-yylo`, completing the eight-skill set required by
-YYLO CLI 0.2.9. It also includes the current external-agent execution and
-universal Ledger retrieval guidance. CLI 0.2.9 requires skills `^2.0.4`.
+Version 2.1.0 source updates `benchmark-yylo` for Benchmark 0.2.0's breaking
+thin-runner lifecycle: reviewed case, run, independent evaluate, report and
+append-only disqualify. It documents workflow-prefix comparisons, interchangeable
+harnesses and trusted-host hygiene without claiming a sandbox or mandatory pilot
+ceremony. CLI 0.2.10 source requires skills `^2.1.0`. These are unreleased source
+versions, not evidence of publication or an installed upgrade.
+
+Version 2.0.4 introduced `benchmark-yylo`, completing the eight-skill set required
+by CLI 0.2.9, whose source declared skills `^2.0.4`. Version 2.1.0 replaces that
+skill's old Benchmark lifecycle guidance; inspect installed Benchmark help/version
+before use. Existing 0.1.x study evidence retains its original interpretation.
 
 Version 2.0.3 requires user-facing Record results to include the actual kind/profile,
 immutable ID, and Ledger-returned slug. Missing fields must be reported as unavailable,
@@ -96,15 +104,17 @@ activate, publish, or overwrite customized skills.
 | [`wiki-yylo`](skills/wiki-yylo/) | Find and maintain durable Markdown knowledge as revisioned Ledger Records. |
 | [`workflow-yylo`](skills/workflow-yylo/) | Store and validate workflow Records while keeping execution separately authorized. |
 | [`artifact-yylo`](skills/artifact-yylo/) | Capture and inspect durable, provenance-bound Ledger evidence. |
-| [`benchmark-yylo`](skills/benchmark-yylo/) | Run pilot-gated model studies with historical tasks and per-task Ledger evidence. |
+| [`benchmark-yylo`](skills/benchmark-yylo/) | Prepare reusable cases, compare models/harnesses and independently evaluate retained outputs. |
 | [`understand-project-yylo`](skills/understand-project-yylo/) | Inspect the user project before planning or implementation. |
 | [`plan-ledger-tasks-yylo`](skills/plan-ledger-tasks-yylo/) | Create a PDR and implementation-sized Ledger tasks. |
 | [`ralph-loop-yylo`](skills/ralph-loop-yylo/) | Execute exactly one explicitly assigned Ledger task through validated delivery. |
 
 The `benchmark-yylo` skill (for YYLO Benchmark / `yylo-benchmark` requests)
-is included starting with version 2.0.4. It distinguishes isolated and
-owner-approved trusted-host runs, canonical `yy pi` dispatch, exact-shape setup
-canaries, invalid infrastructure, immutable repairs and pilot approval gates.
+is included starting with version 2.0.4. Current source targets Benchmark 0.2.0:
+historical tasks, arbitrary prompts and workflow prefixes; Pi, command and
+Workflow Runner adapters; later independent judges without candidate reruns.
+Execution, checks, opinions, errors and disqualification remain separate. Study
+protocols may require pilot approval, but the runner adds no such ceremony.
 
 The four Ledger Record skills are usable with standalone Ledger. The planning and execution skills rely on YYLO orchestration. Each skill has one canonical cross-agent source under `skills/<slug>/`; agent-specific variants are added only for demonstrated runtime incompatibility.
 

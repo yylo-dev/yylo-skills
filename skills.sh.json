@@ -22,7 +22,7 @@
     },
     {
       "title": "Execution",
-      "description": "Skills for bounded task-driven delivery and pilot-gated model evaluation.",
+      "description": "Skills for bounded task-driven delivery and trusted-host agent-system experiments.",
       "skills": [
         "benchmark-yylo",
         "ralph-loop-yylo"

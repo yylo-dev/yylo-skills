@@ -59,10 +59,14 @@ for (const skill of fs.readdirSync(path.join(source, 'skills'))) {
   });
 }
 for (const [file, contract, diagnostic] of [
-  ['SKILL.md', 'yy pi --model openai-codex/<complete-name>', 'lost invocation contract'],
-  ['SKILL.md', 'zero-dispatch setup canary', 'lost invocation contract'],
-  ['SKILL.md', 'Unknown cost is unknown, never zero', 'lost invocation contract'],
-  ['SKILL.md', 'owner approval before task 2', 'lost invocation contract'],
+  ...['yylo-benchmark --version', 'case -> run -> evaluate -> report',
+    'fresh history-free repository', 'trusted-host hygiene, not a security sandbox',
+    'YYLO_BENCHMARK_REQUEST_JSON', 'from initial input through X inclusive',
+    'the prefix, not X independently', 'without rerunning candidates',
+    'evaluator error', 'Disqualification is append-only',
+    'Unknown cost is unknown, never zero', 'only when the agreed study protocol requires it']
+    .map((contract) => ['SKILL.md', contract, 'lost invocation contract']),
+  ['references/historical-tasks.md', 'baseline failure and reference success', 'missing benchmark preparation contract'],
   ['references/historical-tasks.md', 'conflicting ancestor YYLO workspace', 'missing benchmark preparation contract'],
   ['references/historical-tasks.md', 'metadata/history retrieval is not byte round-trip proof', 'missing benchmark preparation contract'],
   ['references/historical-tasks.md', 'not a verified native report', 'missing benchmark preparation contract'],
@@ -76,7 +80,7 @@ for (const [file, contract, diagnostic] of [
       const target = path.join(root, 'skills/benchmark-yylo', file);
       // Normalize wrapping so this tests the semantic contract, not layout.
       const text = fs.readFileSync(target, 'utf8');
-      const pattern = new RegExp(contract.split(/\s+/).map((word) => word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('\\s+'));
+      const pattern = new RegExp(contract.split(/\s+/).map((word) => word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('\\s+'), 'g');
       assert.match(text, pattern);
       fs.writeFileSync(target, text.replace(pattern, 'REMOVED BENCHMARK BOUNDARY'));
       assert.throws(() => execFileSync(process.execPath, [path.join(root, 'scripts/validate.mjs')],
@@ -86,6 +90,27 @@ for (const [file, contract, diagnostic] of [
     }
   });
 }
+for (const injected of [
+  'yylo-benchmark plan --task T1', 'yy benchmark recover --attempt old',
+  'yylo-benchmark doctor', 'yy benchmark regrade', 'yylo-benchmark rejudge',
+  'Use default isolation.', 'wait for owner approval before task 2',
+  'Assume a fixed deterministic-command timeout.',
+]) {
+  test(`rejects retired Benchmark guidance: ${injected}`, () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'yylo-benchmark-retired-'));
+    try {
+      for (const item of ['skills', 'scripts', 'VERSION', 'skills.sh.json', '.claude-plugin']) {
+        fs.cpSync(path.join(source, item), path.join(root, item), { recursive: true });
+      }
+      fs.writeFileSync(path.join(root, 'skills/benchmark-yylo/references/regression.md'), injected);
+      assert.throws(() => execFileSync(process.execPath, [path.join(root, 'scripts/validate.mjs')],
+        { stdio: 'pipe' }), /retired benchmark instruction/);
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
+  });
+}
+
 for (const [name, injected] of [
   ['arbiter command', 'yy merge arbiter run TASK_ID'],
   ['drive command', 'yy merge drive TASK_ID'],

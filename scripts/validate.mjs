@@ -23,10 +23,12 @@ if (JSON.stringify(actual) !== JSON.stringify(expected)) {
 const requiredContracts = {
   'artifact-yylo': ['$ARGUMENTS'],
   'benchmark-yylo': ['$ARGUMENTS', 'references/historical-tasks.md',
-    'yy pi --model openai-codex/<complete-name>', 'trusted-host lane requires explicit owner approval',
-    'zero-dispatch setup canary', 'baseline failure and reference success',
-    'Unknown quality', 'new plan/cohort', 'Unknown cost is unknown, never zero',
-    'owner approval before task 2', 'not a failed capability test'],
+    'yylo-benchmark --version', 'case -> run -> evaluate -> report',
+    'fresh history-free repository', 'trusted-host hygiene, not a security sandbox',
+    'YYLO_BENCHMARK_REQUEST_JSON', 'from initial input through X inclusive',
+    'the prefix, not X independently', 'without rerunning candidates',
+    'evaluator error', 'Disqualification is append-only',
+    'Unknown cost is unknown, never zero', 'only when the agreed study protocol requires it'],
   'ledger-tasks-yylo': ['$ARGUMENTS'],
   'plan-ledger-tasks-yylo': ['$ARGUMENTS'],
   'ralph-loop-yylo': ['Read [references/implement.md](references/implement.md) completely',
@@ -127,9 +129,30 @@ for (const contract of [
 const benchmark = fs.readFileSync(path.join(skillsRoot, 'benchmark-yylo/references/historical-tasks.md'), 'utf8').replace(/\s+/g, ' ');
 for (const contract of ['exact attempt-directory shape', 'conflicting ancestor YYLO workspace',
   'ignore rules that hide durable configuration', 'separate grader copy',
-  'fixed deterministic-command timeout', 'metadata/history retrieval is not byte round-trip proof',
+  'baseline failure and reference success', 'metadata/history retrieval is not byte round-trip proof',
   'not a verified native report', 'Candidate staging, commits and new files all count']) {
   if (!benchmark.includes(contract)) throw new Error(`missing benchmark preparation contract: ${contract}`);
+}
+
+// Reject obsolete executable guidance anywhere in Benchmark's documentation,
+// including future nested references; historical command names in retirement prose
+// remain allowed.
+const benchmarkMarkdown = [];
+function visitBenchmark(directory) {
+  for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+    const file = path.join(directory, entry.name);
+    if (entry.isDirectory()) visitBenchmark(file);
+    else if (entry.name.endsWith('.md')) benchmarkMarkdown.push(fs.readFileSync(file, 'utf8'));
+  }
+}
+visitBenchmark(path.join(skillsRoot, 'benchmark-yylo'));
+const benchmarkGuidance = benchmarkMarkdown.join('\n').replace(/\s+/g, ' ');
+for (const retired of [
+  /\b(?:yylo-benchmark|yy benchmark)\s+(?:plan|recover|doctor|regrade|rejudge)\b/i,
+  /trusted-host lane requires explicit owner approval|default isolation/i,
+  /wait for owner approval before task 2|fixed deterministic-command timeout/i,
+]) {
+  if (retired.test(benchmarkGuidance)) throw new Error(`retired benchmark instruction: ${retired}`);
 }
 
 const config = JSON.parse(fs.readFileSync(path.join(root, 'skills.sh.json'), 'utf8'));

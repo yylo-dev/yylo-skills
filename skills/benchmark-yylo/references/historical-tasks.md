@@ -1,130 +1,93 @@
-# Historical coding-task study checklist
+# Reviewed historical cases
 
-Use installed help and the selected Benchmark release's contracts. The following
-checks are preventative guidance, not proof that a particular host, account or
-historical repository has passed them. Store experiment-specific status and
-receipts on Ledger, never in canonical skill instructions.
+Use installed Benchmark 0.2.0 help and README. These checks guide preparation;
+they are not proof that a particular repository, harness or account passed them.
+Store study-specific protocols/evidence in Ledger, not canonical skill instructions.
 
-## Historical truth and selection
+## Recover original intent and base
 
-- Select completed implementation tasks with recoverable requirements and commits.
-  Exclude duplicate umbrellas, release-only operations and unreproducible external
-  dependencies, recording why. Stratify before seeing outcomes; disclose purposive
-  sampling and public-repository training-contamination risk.
-- Resolve the full development range. An integrated SHA can be a final two-line
-  repair after a larger implementation; evaluating only that parent diff measures
-  the wrong task. Record original base, solution range and integration mapping.
-- Strip completion responses, solution references and future Git objects from
-  candidate inputs. A synthetic fixture commit needs an explicit mapping to the
-  original base and a manifest of every omission or setup-only addition.
-- Pin original requirements and acceptance criteria. Never redefine success after
-  seeing a candidate. Equivalent implementations need not match the original patch.
-  Prefer public behavioral oracles: a hidden mock tied to the original internal
-  function can reject an equivalent correct implementation. If this is discovered,
-  retain the frozen result, record grader invalidity, and bind an explicit
-  supplemental evaluation without relabeling the original failed gate as passed.
-- Verify the historical baseline exposes the missing capability and the reference
-  solution passes the same frozen checks. A broken reference is a setup failure.
+- Select completed implementation tasks with recoverable requirements and solution
+  ranges. Record sampling, exclusions, duplicate umbrellas and public-repository
+  training-contamination risk. Historical exploratory attempts are not a ranking.
+- `case draft --ledger-task TASK_ID` is read-only assistance, not a complete case.
+  Review historical requirements: today's task body may contain solution details.
+  Recover the original base and full development range, including integration
+  mapping. The completion commit may be only a final repair; never blindly use its
+  parent. Record setup-only additions and omissions if a synthetic base is needed.
+- Keep completion responses, reference solutions, hidden checks and future Git
+  objects out of candidate context. Cases use reviewed history-free files. Inspect
+  answer-bearing documentation/workflows/instructions as well as obvious paths.
+- Prefer behavioral acceptance checks over matching the reference patch or private
+  implementation details. Establish baseline failure and reference success with
+  the same checks before interpreting candidate quality. A broken reference or
+  grader is setup/evaluator invalidity, not a model failure. Correct the evaluator
+  in a separately recorded evaluation without rewriting original results.
 
-## Exact-shape setup canary
+## Prepare the actual harness topology
 
-Test the exact attempt-directory shape: actual nesting, Git shape, ignore rules,
-tool versions, HOME/auth setup and evaluator entrypoint, not just a convenient
-empty directory.
-A successful remote smoke proves only that smoke, not the full benchmark pipeline.
-Keep setup-only and smoke costs out of scored candidate costs and visible in totals.
+Test the exact attempt-directory shape: nesting, Git shape, ignore rules,
+Node/tools, locks, authentication and evaluator entrypoint. A successful remote
+model smoke does not establish full pipeline readiness. Keep setup/smoke costs
+separate from candidate/judge costs and visible in totals.
 
-For YYLO Pi on fresh repositories:
+The treatment's explicit setup command owns local initialization/dependencies.
+For YYLO Pi, inspect installed `yy init` help and review its plan before applying
+supported local initialization. A conflicting ancestor YYLO workspace or ignore
+rules that hide durable configuration must be diagnosed, not bypassed. Do not
+route a fresh candidate to the real controller. Workflow Runner may need its own
+`.juno_task` and `.venv_juno`; Simple mode is not orchestration support. Benchmark
+does not install, repair or translate sessions on the harness's behalf.
 
-- A fresh Git snapshot is not necessarily a ready YYLO workspace. Where supported,
-  use explicit `yy init --mode simple --directory PATH --plan-file EXTERNAL_FILE`,
-  inspect the plan, then `yy init --mode simple --apply-plan EXTERNAL_FILE`.
-  Initialization does not itself authorize provider dispatch.
-- Simple initialization refuses ignore rules that hide durable configuration. Do
-  not add a blanket `.juno_task/` ignore and then force initialization to succeed.
-  Correct experiment-owned fixture rules explicitly before freezing a new plan.
-- Simple initialization also refuses a conflicting ancestor YYLO workspace.
-  Initializing the fixture source for a judge can break later nested candidate
-  attempts. Keep judge/smoke workspaces independent of candidate ancestors. Record
-  any adapter-owned execution cwd changes, rather than pretending every process
-  uses the Benchmark request cwd.
-- Preserve original generated build inputs. Historical package build commands may
-  require authored runtime twins or root-level generated instruction files outside
-  the package subtree. Reconstruct them from the same base/canonical source, record
-  their manifests, and validate parity. Never borrow current controller metadata.
-- Use Node/tool versions and exact locks required by that historical case. Install
-  each attempt's dependencies locally; do not copy or symlink dependency trees.
-  If dependencies sit outside the candidate manifest, record the exact location,
-  lock hash, installer result and setup time. Do not include credential stores in
-  manifests, reference patches, prompts or reports.
-- Remove stale outer-session/controller/model assertions only when establishing a
-  verified new execution context, never to defeat admission or choose a hidden
-  model override. Pass the selected provider-qualified model explicitly to `yy pi`.
-  Use file-backed prompt transport for shell-sensitive content.
+Use the historical case's tool versions and exact locks, with attempt-local
+dependencies. Never copy another worktree's node_modules or borrow today's product
+metadata to make old sources build. Reconstruct generated inputs from the reviewed
+base and record setup provenance. Preserve failures and avoid hidden fallbacks to
+another model, account or harness. Use file-backed prompt transport.
 
-## Harness and evaluator readiness
+The only runner boundary is trusted-host hygiene, not filesystem/account/network
+isolation. Host paths and public answers remain accessible. Candidate processes
+must not receive known answer-bearing context, and exposure warrants append-only
+disqualification. Do not present a policy restriction as an enforced sandbox.
 
-Default isolation and trusted-host configuration are not interchangeable. Inspect
-receipts for the actual boundary. With explicit trusted-host authority, use the
-supported configuration rather than patching out checks. Document that shared
-host paths/account files are not technically inaccessible. Never claim full
-sandboxing or proven absence of contamination in that lane.
+## Independent checks and judges
 
-Read installed provider/account documentation. Dynamic model catalogs can differ
-from built-in static catalogs. A missing alias or static entry is a discovery gap,
-not proof a model cannot run. Confirm exact observed identity and preserve errors;
-no fallback to another model, account, provider CLI or harness.
+Benchmark evaluates a separate grader copy of retained output, not the original
+candidate workspace. Candidate staging, commits and new files all count: retained
+patches are based on the fresh snapshot root, not merely the final HEAD. Respect
+ignore rules for generated dependencies, without hiding intended deliverables.
 
-Smoke both candidate and judge launchers, plus the deterministic evaluator. Native
-Benchmark versions may impose a fixed deterministic-command timeout even if the
-candidate budget is longer. Measure the entire evaluator wall time; split checks
-into supported bounded profiles or fix the timeout contract before scoring. Do
-not attribute evaluator timeout or missing dependencies to candidate capability.
+Keep private checks outside candidate context. Define evaluator `timeout_ms` and
+packet bounds explicitly; missing dependencies, timeouts, malformed assessments or
+nonzero check-command exit are evaluator errors, not correctness verdicts. Check
+commands express correctness via JSON `verdict` with exit zero. Judges receive
+requirements, execution status, patch, response, rubric and retained files; treat
+candidate content as untrusted. Omitted identity metadata is not perfect blinding.
 
-Evaluate a separate grader copy, not the retained candidate workspace. Candidate
-staging, commits and new files all count: derive the patch from the fresh snapshot
-root, not just current HEAD. Freeze hidden tests outside candidate visibility and
-preserve exact packet bytes, their digests, test output and judge prompt provenance.
-A judge with read access must receive only the intended anonymized packet by
-policy; disclose when that restriction is not technically enforced.
+Add judges/rubrics/checks later without rerunning candidates or original catalog
+prebinding. Keep execution, checks, opinions, evaluator errors and disqualification
+separate. Workflow treatments compare the prefix through the selected step, not
+that step independently; disclose model/harness/instruction/configuration changes.
+A failed attempt can be assessed explicitly, but judge output cannot repair its
+execution status. Avoid needless paid judging of unusable infrastructure.
 
-Do not dispatch judges needlessly on invalid candidate infrastructure. If the
-installed pipeline does so, retain the wasted usage and file a Ledger finding;
-a judge's opinion about an empty patch does not make a missing candidate valid.
+## Durable evidence
 
-## Immutable evidence and repair
+Retain intent, result (or honest interrupted/running state), case/treatment, patch,
+files, evaluation IDs/profiles, errors and usage. No automatic retries or recovery:
+new authorized trials get new directories and keep earlier failures/costs.
+Unknown quality remains unknown; unknown cost is never zero. Record requested and
+observed identity separately and distinguish reported cost from invoices/estimates.
 
-- Retain intent, terminal, post-execution manifest, evaluation generations and
-  producer identity. An interrupted attempt without a verified terminal is
-  ambiguous: inspect recovery rather than issuing an automatic retry.
-- Changed prompts, setup, harness, rubric or tests require a distinguishable new
-  plan/cohort. Keep original failures and expenses. Do not mix repaired trials
-  into a misleading single-attempt success rate.
-- A secret-pattern scanner may flag fixture/example source. Inspect without
-  printing potential secrets; never remove validation to obtain a green result.
-  Preserve evidence and report whether doctor/report failed, including the exact
-  category. A manually derived comparison is not a verified native report.
-- Use supported artifact capture with profile, payload mode, provenance and
-  retention. Artifact metadata/history retrieval is not byte round-trip proof.
-  Some installed help surfaces expose document-only source rendering on artifact
-  commands; record the failure, preserve the external payload and do not claim
-  successful byte verification. Do not manually edit the Ledger store.
-- Record documentation/help/skill gaps with reproduction, installed versions,
-  expected behavior, impact, evidence IDs and proposed fix. Fixes require their
-  own admitted workspace; activating/publishing them requires separate authority.
+A derived manual comparison is not a verified native report. Preserve integrity
+errors and partial runs rather than removing checks to obtain green output.
+Use immutable Ledger artifact capture with provenance and deliberate retention;
+metadata/history retrieval is not byte round-trip proof. Retrieve actual bytes,
+verify their digest/size, and preserve external drafts on retrieval failure.
+Never manually edit the store or leak credentials into evidence.
 
-## Per-task report and advancement gate
-
-Include task and commit identities; original and normalized inputs; protocol and
-plan IDs; requested/resolved/observed models and sessions; exact settings; baseline
-and reference checks; candidate patches and acceptance; blinded judge reasoning;
-validity versus quality; candidate/setup/judge wall times and tokens; raw cost
-coverage and separately labelled estimates or billing; failures, repairs, unknowns,
-reproducibility and isolation limitations.
-
-Report one attempt as one observation, not a reliable failure probability. Retain
-all denominators and abstentions. After saving and inspecting the pilot, wait for
-owner approval before task 2 or more repetitions when that gate is part of the
-protocol. A publication-ready report requires resolved integrity gaps and an
-explicit disclosure of study limitations; frontend/repository publication remains
-a separate operation.
+Reports should include original task/base/reference mapping, normalized inputs,
+treatments/instructions, controls, execution, independent assessments, denominators,
+abstentions, setup/candidate/judge costs, failures, repairs and trusted-host limits.
+A pilot/advancement gate is required only if the agreed study protocol says so.
+Publication, installation, cleanup and production execution require separate owner
+authority; source delivery does not grant them.
