@@ -24,7 +24,8 @@
       "commands": ["yylo-benchmark --version\nyylo-benchmark --help"],
       "boundary": "Unreleased 2.1.0 source guidance does not publish, install or activate Benchmark or skills. Historical release evidence below remains unchanged.",
       "sourceFiles": ["skills/benchmark-yylo/SKILL.md", "skills/benchmark-yylo/references/historical-tasks.md"],
-      "verifiedReleases": []
+      "verifiedReleases": [],
+      "releaseEvidence": "Source-only guidance; no published release evidence verifies the Benchmark 0.2.0 contract yet."
     },
     {
       "id": "catalog",
