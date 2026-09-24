@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "packageId": "yylo-skills",
+  "sourceVersion": "2.0.4",
+  "additionalSkills": "reject",
+  "skills": {
+    "artifact-yylo": { "contractVersion": 1, "semantics": "complete-request", "placeholders": { "$ARGUMENTS": 1 } },
+    "benchmark-yylo": { "contractVersion": 1, "semantics": "complete-request", "placeholders": { "$ARGUMENTS": 1 } },
+    "ledger-tasks-yylo": { "contractVersion": 1, "semantics": "complete-request", "placeholders": { "$ARGUMENTS": 1 } },
+    "plan-ledger-tasks-yylo": { "contractVersion": 1, "semantics": "complete-request", "placeholders": { "$ARGUMENTS": 1 } },
+    "ralph-loop-yylo": { "contractVersion": 1, "semantics": "complete-assigned-request", "placeholders": { "$ARGUMENTS": 1 } },
+    "understand-project-yylo": { "contractVersion": 1, "semantics": "structured-main-task-constraints-and-complete-request", "placeholders": { "$1": 1, "$2": 1, "$ARGUMENTS": 1 } },
+    "wiki-yylo": { "contractVersion": 1, "semantics": "complete-request", "placeholders": { "$ARGUMENTS": 1 } },
+    "workflow-yylo": { "contractVersion": 1, "semantics": "complete-request", "placeholders": { "$ARGUMENTS": 1 } }
+  }
+}

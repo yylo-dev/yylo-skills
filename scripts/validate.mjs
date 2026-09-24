@@ -4,18 +4,15 @@ import path from 'node:path';
 
 const root = path.resolve(import.meta.dirname, '..');
 const skillsRoot = path.join(root, 'skills');
-const expected = [
-  'artifact-yylo',
-  'benchmark-yylo',
-  'ledger-tasks-yylo',
-  'plan-ledger-tasks-yylo',
-  'ralph-loop-yylo',
-  'understand-project-yylo',
-  'wiki-yylo',
-  'workflow-yylo',
-];
+const manifest = JSON.parse(fs.readFileSync(path.join(root, 'skills-manifest.json'), 'utf8'));
+if (manifest.schemaVersion !== 1 || manifest.packageId !== 'yylo-skills'
+    || manifest.additionalSkills !== 'reject'
+    || manifest.sourceVersion !== fs.readFileSync(path.join(root, 'VERSION'), 'utf8').trim()) {
+  throw new Error('unsupported or inconsistent skills release manifest');
+}
+const expected = Object.keys(manifest.skills).sort();
 const actual = fs.readdirSync(skillsRoot, { withFileTypes: true })
-  .filter((entry) => entry.isDirectory()).map((entry) => entry.name).sort();
+  .map((entry) => { if (!entry.isDirectory()) throw new Error(`unsafe skill entry: ${entry.name}`); return entry.name; }).sort();
 if (JSON.stringify(actual) !== JSON.stringify(expected)) {
   throw new Error(`unexpected canonical skills: ${actual.join(', ')}`);
 }
@@ -38,6 +35,11 @@ const requiredContracts = {
   'wiki-yylo': ['$ARGUMENTS'],
   'workflow-yylo': ['$ARGUMENTS'],
 };
+// Behavioral requirements stay independently authored, never generated from
+// the manifest: deleting an identity from both source and manifest must fail.
+if (JSON.stringify(Object.keys(requiredContracts).sort()) !== JSON.stringify(expected)) {
+  throw new Error('release manifest does not cover independent behavioral requirements');
+}
 const legacy = ['kanban-workflow', 'plan-kanban-tasks', 'ralph-loop`', 'understand-project`'];
 for (const slug of expected) {
   const directory = path.join(skillsRoot, slug);
@@ -47,6 +49,14 @@ for (const slug of expected) {
     throw new Error(`missing SKILL.md or README.md for ${slug}`);
   }
   const text = fs.readFileSync(skillPath, 'utf8');
+  const contract = manifest.skills[slug];
+  const counts = {};
+  for (const [placeholder] of text.matchAll(/\$ARGUMENTS\b|\$[1-9][0-9]*/g)) counts[placeholder] = (counts[placeholder] ?? 0) + 1;
+  const ordered = value => JSON.stringify(Object.entries(value ?? {}).sort(([a], [b]) => a.localeCompare(b)));
+  if (contract.contractVersion !== 1 || typeof contract.semantics !== 'string'
+      || !contract.placeholders?.$ARGUMENTS || ordered(counts) !== ordered(contract.placeholders)) {
+    throw new Error(`${slug}: manifest invocation contract mismatch`);
+  }
   if (!text.startsWith('---\n') || !text.includes(`\nname: ${slug}\n`)) {
     throw new Error(`frontmatter identity mismatch for ${slug}`);
   }
