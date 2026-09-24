@@ -105,6 +105,7 @@ for (const injected of [
       for (const item of ['skills', 'scripts', 'VERSION', 'skills.sh.json', '.claude-plugin']) {
         fs.cpSync(path.join(source, item), path.join(root, item), { recursive: true });
       }
+      fs.copyFileSync(path.join(source, 'skills-manifest.json'), path.join(root, 'skills-manifest.json'));
       fs.writeFileSync(path.join(root, 'skills/benchmark-yylo/references/regression.md'), injected);
       assert.throws(() => execFileSync(process.execPath, [path.join(root, 'scripts/validate.mjs')],
         { stdio: 'pipe' }), /retired benchmark instruction/);

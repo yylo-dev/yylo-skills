@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packageId": "yylo-skills",
-  "sourceVersion": "2.0.4",
+  "sourceVersion": "2.1.0",
   "additionalSkills": "reject",
   "skills": {
     "artifact-yylo": { "contractVersion": 1, "semantics": "complete-request", "placeholders": { "$ARGUMENTS": 1 } },
