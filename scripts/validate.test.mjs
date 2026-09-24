@@ -26,6 +26,7 @@ const retrievalCases = [
 for (const [file, contract, diagnostic] of retrievalCases) {
   test(`rejects removed retrieval boundary in ${file}: ${contract}`, () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'yylo-retrieval-contract-'));
+    fs.copyFileSync(path.join(source, 'skills-manifest.json'), path.join(root, 'skills-manifest.json'));
     try {
       for (const item of ['skills', 'scripts', 'VERSION', 'skills.sh.json', '.claude-plugin']) {
         fs.cpSync(path.join(source, item), path.join(root, item), { recursive: true });
@@ -45,6 +46,7 @@ for (const [file, contract, diagnostic] of retrievalCases) {
 for (const skill of fs.readdirSync(path.join(source, 'skills'))) {
   test(`rejects missing actual slug reporting in ${skill}`, () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'yylo-reporting-contract-'));
+    fs.copyFileSync(path.join(source, 'skills-manifest.json'), path.join(root, 'skills-manifest.json'));
     try {
       for (const item of ['skills', 'scripts', 'VERSION', 'skills.sh.json', '.claude-plugin']) {
         fs.cpSync(path.join(source, item), path.join(root, item), { recursive: true });
@@ -69,6 +71,7 @@ for (const [file, contract, diagnostic] of [
 ]) {
   test(`rejects removed benchmark boundary: ${contract}`, () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'yylo-benchmark-contract-'));
+    fs.copyFileSync(path.join(source, 'skills-manifest.json'), path.join(root, 'skills-manifest.json'));
     try {
       for (const item of ['skills', 'scripts', 'VERSION', 'skills.sh.json', '.claude-plugin']) {
         fs.cpSync(path.join(source, item), path.join(root, item), { recursive: true });
@@ -99,6 +102,7 @@ for (const [name, injected] of [
 ]) {
   test(`rejects ${name} in nested skill references`, () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'yylo-skill-contract-'));
+    fs.copyFileSync(path.join(source, 'skills-manifest.json'), path.join(root, 'skills-manifest.json'));
     try {
       for (const item of ['skills', 'scripts', 'VERSION', 'skills.sh.json', '.claude-plugin']) {
         fs.cpSync(path.join(source, item), path.join(root, item), { recursive: true });
