@@ -96,5 +96,3 @@ actual immutable Record ID, and actual Ledger slug from the returned Record or a
 native get readback. Never invent a slug from the title or confuse it with the ID.
 If the selected API omits a field, say it is unavailable rather than fabricate it.
 IDs remain authoritative for relations and lifecycle operations; slugs aid discovery.
-
-$ARGUMENTS

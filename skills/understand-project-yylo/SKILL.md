@@ -52,5 +52,3 @@ $1
 $2
 
 ### Complete raw request
-
-$ARGUMENTS

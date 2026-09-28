@@ -158,5 +158,3 @@ If the selected API omits a field, say it is unavailable rather than fabricate i
 IDs remain authoritative for relations and lifecycle operations; slugs aid discovery.
 
 ## Complete request
-
-$ARGUMENTS
