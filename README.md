@@ -35,6 +35,14 @@ Every canonical slug ends in `-yylo`, keeping selector prefixes useful: type `w`
 
 ## Native delivery and compatible CLI installation
 
+Version 2.1.1 trims the literal `$ARGUMENTS` tail line from every `SKILL.md`. The
+`skills` CLI substitutes that placeholder when invoking a skill, but plain plugin
+auto-discovery (for example Claude Code plugin installs) renders it verbatim, so
+installed agents saw a stray marker line. Manifest invocation contracts and the
+validator now compare declared placeholder counts instead of requiring the
+`$ARGUMENTS` marker; `understand-project-yylo` still declares its `$1`/`$2`
+placeholders.
+
 Version 2.1.0 source updates `benchmark-yylo` for Benchmark 0.2.0's breaking
 thin-runner lifecycle: reviewed case, run, independent evaluate, report and
 append-only disqualify. It documents workflow-prefix comparisons, interchangeable
@@ -79,6 +87,13 @@ coverage. Maintainers publish each new version with a new immutable tag; never
 replace an existing release tag. `capabilities.json`
 retains evidence for previously published releases; do not invent new release
 hashes before publication.
+
+## Runtime naming note
+
+The `yy` CLI stores workspace state under `.juno_task/` and routes controllers
+through the `JUNO_TASK_ROOT` environment variable. These are the CLI's current,
+documented runtime contract — not legacy names — and the skills reference them
+accordingly. See the [CLI repository](https://github.com/yylo-dev/yylo).
 
 ## Universal Ledger retrieval guidance
 

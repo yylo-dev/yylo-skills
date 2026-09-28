@@ -18,22 +18,22 @@ if (JSON.stringify(actual) !== JSON.stringify(expected)) {
 }
 
 const requiredContracts = {
-  'artifact-yylo': ['$ARGUMENTS'],
-  'benchmark-yylo': ['$ARGUMENTS', 'references/historical-tasks.md',
+  'artifact-yylo': [],
+  'benchmark-yylo': ['references/historical-tasks.md',
     'yylo-benchmark --version', 'case -> run -> evaluate -> report',
     'fresh history-free repository', 'trusted-host hygiene, not a security sandbox',
     'YYLO_BENCHMARK_REQUEST_JSON', 'from initial input through X inclusive',
     'the prefix, not X independently', 'without rerunning candidates',
     'evaluator error', 'Disqualification is append-only',
     'Unknown cost is unknown, never zero', 'only when the agreed study protocol requires it'],
-  'ledger-tasks-yylo': ['$ARGUMENTS'],
-  'plan-ledger-tasks-yylo': ['$ARGUMENTS'],
+  'ledger-tasks-yylo': [],
+  'plan-ledger-tasks-yylo': [],
   'ralph-loop-yylo': ['Read [references/implement.md](references/implement.md) completely',
-    '## Complete assigned request', '$ARGUMENTS'],
-  'understand-project-yylo': ['$1', '$2', '$ARGUMENTS', '### Main task',
+    '## Complete assigned request'],
+  'understand-project-yylo': ['$1', '$2', '### Main task',
     '### Constraints and context', '### Complete raw request'],
-  'wiki-yylo': ['$ARGUMENTS'],
-  'workflow-yylo': ['$ARGUMENTS'],
+  'wiki-yylo': [],
+  'workflow-yylo': [],
 };
 // Behavioral requirements stay independently authored, never generated from
 // the manifest: deleting an identity from both source and manifest must fail.
@@ -54,7 +54,7 @@ for (const slug of expected) {
   for (const [placeholder] of text.matchAll(/\$ARGUMENTS\b|\$[1-9][0-9]*/g)) counts[placeholder] = (counts[placeholder] ?? 0) + 1;
   const ordered = value => JSON.stringify(Object.entries(value ?? {}).sort(([a], [b]) => a.localeCompare(b)));
   if (contract.contractVersion !== 1 || typeof contract.semantics !== 'string'
-      || !contract.placeholders?.$ARGUMENTS || ordered(counts) !== ordered(contract.placeholders)) {
+      || ordered(counts) !== ordered(contract.placeholders ?? {})) {
     throw new Error(`${slug}: manifest invocation contract mismatch`);
   }
   if (!text.startsWith('---\n') || !text.includes(`\nname: ${slug}\n`)) {

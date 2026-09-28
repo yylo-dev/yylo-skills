@@ -24,5 +24,3 @@ IDs remain authoritative for relations and lifecycle operations; slugs aid disco
 ## Complete assigned request
 
 Treat the following as the complete user-assigned request. Preserve task references and directives literally; resolve them only through the normal agent workflow.
-
-$ARGUMENTS
