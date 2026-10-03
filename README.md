@@ -1,6 +1,6 @@
 # YYLO Skills
 
-Reusable agent skills maintained by [YYLO](https://yylo.dev). This repository is the canonical, independently versioned source for skills used by YYLO CLI and YYLO Ledger.
+Reusable agent skills maintained by [YYLO](https://yylo.dev). This repository is the canonical, independently versioned source for skills used by YYLO CLI, YYLO Ledger and YYLO Benchmark.
 
 [![skills.sh](https://skills.sh/b/yylo-dev/yylo-skills)](https://skills.sh/yylo-dev/yylo-skills)
 [![Mentioned in Claude Skill Registry](https://awesome.re/mentioned-badge.svg)](https://github.com/majiayu000/claude-skill-registry)
@@ -104,7 +104,7 @@ activate, publish, or overwrite customized skills.
 | [`wiki-yylo`](skills/wiki-yylo/) | Find and maintain durable Markdown knowledge as revisioned Ledger Records. |
 | [`workflow-yylo`](skills/workflow-yylo/) | Store and validate workflow Records while keeping execution separately authorized. |
 | [`artifact-yylo`](skills/artifact-yylo/) | Capture and inspect durable, provenance-bound Ledger evidence. |
-| [`benchmark-yylo`](skills/benchmark-yylo/) | Prepare reusable cases, compare models/harnesses and independently evaluate retained outputs. |
+| [`benchmark-yylo`](skills/benchmark-yylo/) | Prepare reusable cases and frozen project/task checklists; compare models/harnesses and independently evaluate retained outputs. |
 | [`understand-project-yylo`](skills/understand-project-yylo/) | Inspect the user project before planning or implementation. |
 | [`plan-ledger-tasks-yylo`](skills/plan-ledger-tasks-yylo/) | Create a PDR and implementation-sized Ledger tasks. |
 | [`ralph-loop-yylo`](skills/ralph-loop-yylo/) | Execute exactly one explicitly assigned Ledger task through validated delivery. |
@@ -115,6 +115,13 @@ historical tasks, arbitrary prompts and workflow prefixes; Pi, command and
 Workflow Runner adapters; later independent judges without candidate reruns.
 Execution, checks, opinions, errors and disqualification remain separate. Study
 protocols may require pilot approval, but the runner adds no such ceremony.
+
+Checklist judging guidance and reusable examples are part of this same skill at
+[`skills/benchmark-yylo/references/checklists.md`](skills/benchmark-yylo/references/checklists.md).
+There is no separately packaged `benchmark-checklist` skill and no runtime-owned
+skill copy. Benchmark ships its CLI/API documentation and tests; this repository
+owns reusable agent instructions. Inspect installed criteria flags before using
+checklist features. Source updates here do not publish or activate a skills release.
 
 The four Ledger Record skills are usable with standalone Ledger. The planning and execution skills rely on YYLO orchestration. Each skill has one canonical cross-agent source under `skills/<slug>/`; agent-specific variants are added only for demonstrated runtime incompatibility.
 

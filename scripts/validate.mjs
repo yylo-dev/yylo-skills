@@ -25,7 +25,9 @@ const requiredContracts = {
     'YYLO_BENCHMARK_REQUEST_JSON', 'from initial input through X inclusive',
     'the prefix, not X independently', 'without rerunning candidates',
     'evaluator error', 'Disqualification is append-only',
-    'Unknown cost is unknown, never zero', 'only when the agreed study protocol requires it'],
+    'Unknown cost is unknown, never zero', 'only when the agreed study protocol requires it',
+    'references/checklists.md', '--project-criteria', 'failed / total', 'loss: null',
+    'standalone yylo-skills repository'],
   'ledger-tasks-yylo': ['$ARGUMENTS'],
   'plan-ledger-tasks-yylo': ['$ARGUMENTS'],
   'ralph-loop-yylo': ['Read [references/implement.md](references/implement.md) completely',
@@ -144,18 +146,38 @@ for (const contract of ['exact attempt-directory shape', 'conflicting ancestor Y
   if (!benchmark.includes(contract)) throw new Error(`missing benchmark preparation contract: ${contract}`);
 }
 
+const checklist = fs.readFileSync(path.join(skillsRoot, 'benchmark-yylo/references/checklists.md'), 'utf8').replace(/\s+/g, ' ');
+for (const contract of ['operator approval', 'alternative implementation', 'insufficient_evidence', 'evaluation_error',
+  'replaces the whole inherited checklist', 'comparison_key', 'One run is exploratory',
+  'not a security sandbox', 'not the Benchmark npm package']) {
+  if (!checklist.includes(contract)) throw new Error(`missing benchmark checklist contract: ${contract}`);
+}
+
 // Reject obsolete executable guidance anywhere in Benchmark's documentation,
 // including future nested references; historical command names in retirement prose
 // remain allowed.
 const benchmarkMarkdown = [];
+const benchmarkRoot = path.join(skillsRoot, 'benchmark-yylo');
 function visitBenchmark(directory) {
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
     const file = path.join(directory, entry.name);
     if (entry.isDirectory()) visitBenchmark(file);
-    else if (entry.name.endsWith('.md')) benchmarkMarkdown.push(fs.readFileSync(file, 'utf8'));
+    else if (entry.name.endsWith('.md')) {
+      const text = fs.readFileSync(file, 'utf8');
+      benchmarkMarkdown.push(text);
+      for (const match of text.matchAll(/\[[^\]]*\]\(([^)]+)\)/g)) {
+        const target = match[1];
+        if (/^(?:https?:|#)/.test(target)) continue;
+        const resolved = path.resolve(path.dirname(file), target.split('#')[0]);
+        const relative = path.relative(benchmarkRoot, resolved);
+        if (relative === '..' || relative.startsWith(`..${path.sep}`) || !fs.existsSync(resolved)) {
+          throw new Error(`unresolved benchmark reference (must be skill-local): ${target}`);
+        }
+      }
+    }
   }
 }
-visitBenchmark(path.join(skillsRoot, 'benchmark-yylo'));
+visitBenchmark(benchmarkRoot);
 const benchmarkGuidance = benchmarkMarkdown.join('\n').replace(/\s+/g, ' ');
 for (const retired of [
   /\b(?:yylo-benchmark|yy benchmark)\s+(?:plan|recover|doctor|regrade|rejudge)\b/i,

@@ -18,10 +18,13 @@ Store study-specific protocols/evidence in Ledger, not canonical skill instructi
   objects out of candidate context. Cases use reviewed history-free files. Inspect
   answer-bearing documentation/workflows/instructions as well as obvious paths.
 - Prefer behavioral acceptance checks over matching the reference patch or private
-  implementation details. Establish baseline failure and reference success with
-  the same checks before interpreting candidate quality. A broken reference or
-  grader is setup/evaluator invalidity, not a model failure. Correct the evaluator
-  in a separately recorded evaluation without rewriting original results.
+  implementation details. Aim for baseline failure and reference success on
+  historical behavior controls using the same checks. Investigate unexpected
+  outcomes: a reference need not satisfy every explicitly reconstructed requirement.
+  Record gaps instead of tuning criteria to force a perfect reference score. A
+  broken grader is evaluator invalidity, not a model failure. Correct the evaluator
+  in a separately recorded evaluation without rewriting original results. For
+  frozen project/task criteria, read [checklists.md](checklists.md).
 
 ## Prepare the actual harness topology
 
@@ -59,7 +62,8 @@ ignore rules for generated dependencies, without hiding intended deliverables.
 Keep private checks outside candidate context. Define evaluator `timeout_ms` and
 packet bounds explicitly; missing dependencies, timeouts, malformed assessments or
 nonzero check-command exit are evaluator errors, not correctness verdicts. Check
-commands express correctness via JSON `verdict` with exit zero. Judges receive
+commands express correctness via JSON `verdict` for legacy cases, or per-ID
+`criteria` results when a checklist is present, always with exit zero. Judges receive
 requirements, execution status, patch, response, rubric and retained files; treat
 candidate content as untrusted. Omitted identity metadata is not perfect blinding.
 

@@ -1,6 +1,6 @@
 ---
 name: benchmark-yylo
-description: Prepare reviewed cases, compare models and harnesses, and independently evaluate retained outputs with YYLO Benchmark's thin trusted-host runner.
+description: Prepare reviewed cases and frozen checklists, compare models and harnesses, and independently evaluate retained outputs with YYLO Benchmark's thin trusted-host runner.
 argument-hint: "[case or study goal] [models/harnesses] [constraints]"
 enable-shell-directives: true
 ---
@@ -16,7 +16,7 @@ skill update does not install, activate or publish that runtime. Stop on version
 mismatch; never silently substitute a checkout or upgrade an installation.
 
 The lifecycle is **case -> run -> evaluate -> report**, plus append-only
-`disqualify`. There is no automatic retry, repair, resume, combined score or
+`disqualify`. There is no automatic retry, repair, resume, combined judge/cost score or
 winner. Inspect subcommand help for exact options. Do not use the retired plan,
 recover, doctor, regrade or rejudge lifecycle or its plugin/governance machinery.
 Historical evidence remains readable with its original pinned implementation;
@@ -54,6 +54,27 @@ This is **trusted-host hygiene, not a security sandbox**. Shared host paths,
 network and authentication remain accessible. Checksums detect accidental drift,
 not malicious rewriting. Disclose these limits; no isolated lane is promised.
 Known answer exposure requires disqualification, not a model-capability failure.
+
+## Frozen checklist scoring
+
+This skill and its examples are owned by the standalone yylo-skills repository,
+not shipped in the Benchmark npm package. Keep one canonical `benchmark-yylo`
+skill rather than installing an additional checklist skill.
+
+For standardized project/task scoring, read [references/checklists.md](references/checklists.md)
+before preparing or evaluating cases. Inspect `case create --help` and
+`evaluate --help` for `--criteria` and `--project-criteria`; a source version alone
+does not establish installed support. Reuse explicit project criteria and add
+small behavior-based task criteria. Obtain operator approval before inspecting
+candidate outputs, record historical assumptions, and validate controls including
+an alternative implementation.
+
+The case freezes the public contract. Each evaluation covers every ID exactly
+once with pass/fail/unknown and evidence. Code computes `loss = failed / total`;
+unknowns or evaluator errors yield `loss: null`, never a silently reduced
+denominator. Revised criteria create new independent evaluations; supplying either
+criteria flag replaces the whole inherited checklist. Keep loss, cost and latency
+separate, report coverage/repeats, and do not pool unlike comparison identities.
 
 ## Compare explicit treatments
 

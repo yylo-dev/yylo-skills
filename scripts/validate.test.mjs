@@ -66,12 +66,18 @@ for (const [file, contract, diagnostic] of [
     'YYLO_BENCHMARK_REQUEST_JSON', 'from initial input through X inclusive',
     'the prefix, not X independently', 'without rerunning candidates',
     'evaluator error', 'Disqualification is append-only',
-    'Unknown cost is unknown, never zero', 'only when the agreed study protocol requires it']
+    'Unknown cost is unknown, never zero', 'only when the agreed study protocol requires it',
+    'references/checklists.md', '--project-criteria', 'failed / total', 'loss: null',
+    'standalone yylo-skills repository']
     .map((contract) => ['SKILL.md', contract, 'lost invocation contract']),
   ['references/historical-tasks.md', 'baseline failure and reference success', 'missing benchmark preparation contract'],
   ['references/historical-tasks.md', 'conflicting ancestor YYLO workspace', 'missing benchmark preparation contract'],
   ['references/historical-tasks.md', 'metadata/history retrieval is not byte round-trip proof', 'missing benchmark preparation contract'],
   ['references/historical-tasks.md', 'not a verified native report', 'missing benchmark preparation contract'],
+  ...['operator approval', 'alternative implementation', 'insufficient_evidence', 'evaluation_error',
+    'replaces the whole inherited checklist', 'comparison_key', 'One run is exploratory',
+    'not a security sandbox', 'not the Benchmark npm package'].map(contract =>
+    ['references/checklists.md', contract, 'missing benchmark checklist contract']),
 ]) {
   test(`rejects removed benchmark boundary: ${contract}`, () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'yylo-benchmark-contract-'));
@@ -93,6 +99,22 @@ for (const [file, contract, diagnostic] of [
     }
   });
 }
+test('validates skill-local checklist references without a runtime checkout', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'yylo-standalone-checklist-'));
+  try {
+    for (const item of ['skills', 'scripts', 'VERSION', 'skills.sh.json', 'skills-manifest.json', '.claude-plugin']) {
+      fs.cpSync(path.join(source, item), path.join(root, item), { recursive: true });
+    }
+    const validate = () => execFileSync(process.execPath, [path.join(root, 'scripts/validate.mjs')], { stdio: 'pipe' });
+    assert.doesNotThrow(validate);
+    fs.renameSync(path.join(root, 'skills/benchmark-yylo/examples/project.yaml'), path.join(root, 'project-backup.yaml'));
+    assert.throws(validate, /unresolved benchmark reference/);
+    const guide = path.join(root, 'skills/benchmark-yylo/references/checklists.md');
+    fs.writeFileSync(guide, fs.readFileSync(guide, 'utf8').replace('../examples/project.yaml', '../../../project-backup.yaml'));
+    assert.throws(validate, /must be skill-local/);
+  } finally { fs.rmSync(root, { recursive: true, force: true }); }
+});
+
 for (const injected of [
   'yylo-benchmark plan --task T1', 'yy benchmark recover --attempt old',
   'yylo-benchmark doctor', 'yy benchmark regrade', 'yylo-benchmark rejudge',
