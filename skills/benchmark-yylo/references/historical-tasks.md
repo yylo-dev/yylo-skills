@@ -1,6 +1,6 @@
 # Reviewed historical cases
 
-Use installed Benchmark 0.2.0 help and README. These checks guide preparation;
+Use installed Benchmark 0.2.1 help and README. These checks guide preparation;
 they are not proof that a particular repository, harness or account passed them.
 Store study-specific protocols/evidence in Ledger, not canonical skill instructions.
 

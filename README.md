@@ -35,12 +35,19 @@ Every canonical slug ends in `-yylo`, keeping selector prefixes useful: type `w`
 
 ## Native delivery and compatible CLI installation
 
+Version 2.1.1 extends the existing `benchmark-yylo` skill with frozen project/task
+checklists, evidence-based judgments, deterministic loss and reusable examples.
+It keeps skills in this dedicated repository rather than the Benchmark npm package.
+CLI 0.2.11 declares skills `^2.1.1` and Benchmark 0.2.1. An immutable `v2.1.1` tag
+is the skills release boundary; a version edit alone is not publication or an
+installed upgrade. Existing immutable tags and release evidence remain unchanged.
+
 Version 2.1.0 source updates `benchmark-yylo` for Benchmark 0.2.0's breaking
 thin-runner lifecycle: reviewed case, run, independent evaluate, report and
 append-only disqualify. It documents workflow-prefix comparisons, interchangeable
 harnesses and trusted-host hygiene without claiming a sandbox or mandatory pilot
-ceremony. CLI 0.2.10 source requires skills `^2.1.0`. These are unreleased source
-versions, not evidence of publication or an installed upgrade.
+ceremony. CLI 0.2.10 source requires skills `^2.1.0`. Source declarations alone do not
+establish publication or an installed upgrade; inspect immutable release tags.
 
 Version 2.0.4 introduced `benchmark-yylo`, completing the eight-skill set required
 by CLI 0.2.9, whose source declared skills `^2.0.4`. Version 2.1.0 replaces that
@@ -110,7 +117,7 @@ activate, publish, or overwrite customized skills.
 | [`ralph-loop-yylo`](skills/ralph-loop-yylo/) | Execute exactly one explicitly assigned Ledger task through validated delivery. |
 
 The `benchmark-yylo` skill (for YYLO Benchmark / `yylo-benchmark` requests)
-is included starting with version 2.0.4. Current source targets Benchmark 0.2.0:
+is included starting with version 2.0.4. Current source targets Benchmark 0.2.1:
 historical tasks, arbitrary prompts and workflow prefixes; Pi, command and
 Workflow Runner adapters; later independent judges without candidate reruns.
 Execution, checks, opinions, errors and disqualification remain separate. Study

@@ -11,7 +11,7 @@ enable-shell-directives: true
 
 Inspect `yylo-benchmark --version` and `yylo-benchmark --help` (or delegated
 `yy benchmark --help`) before using commands. This guidance targets Benchmark
-0.2.0's breaking thin-runner contract, not published 0.1.x. A source merge or
+0.2.1's thin-runner/checklist contract, not retired 0.1.x. A source merge or
 skill update does not install, activate or publish that runtime. Stop on version
 mismatch; never silently substitute a checkout or upgrade an installation.
 
