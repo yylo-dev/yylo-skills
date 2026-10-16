@@ -18,6 +18,8 @@ jobs:
           node-version: 22
       - name: Validate repository and invocation contracts
         run: node scripts/validate.mjs
+      - name: Check generated platform manifests
+        run: node scripts/sync-plugins.mjs --check
       - name: Test lifecycle and packaging regressions
         run: node --test scripts/*.test.mjs
       - name: Verify skills CLI discovery

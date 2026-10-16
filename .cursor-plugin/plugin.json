@@ -1,0 +1,33 @@
+{
+  "name": "yylo-skills",
+  "version": "2.1.1",
+  "description": "Reusable agent skills maintained by YYLO. The canonical, independently versioned source for skills used by YYLO CLI and YYLO Ledger: ledger task management, wiki, workflow and artifact records, project understanding, planning, benchmark studies, and the Ralph execution loop.",
+  "author": {
+    "name": "YYLO"
+  },
+  "homepage": "https://yylo.dev",
+  "repository": "https://github.com/yylo-dev/yylo-skills",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "agent-skills",
+    "yylo",
+    "ledger",
+    "kanban",
+    "task-management",
+    "claude-code",
+    "codex",
+    "pi",
+    "cursor"
+  ],
+  "skills": [
+    "./skills/artifact-yylo",
+    "./skills/benchmark-yylo",
+    "./skills/ledger-tasks-yylo",
+    "./skills/plan-ledger-tasks-yylo",
+    "./skills/ralph-loop-yylo",
+    "./skills/understand-project-yylo",
+    "./skills/wiki-yylo",
+    "./skills/workflow-yylo"
+  ]
+}

@@ -66,6 +66,13 @@ Maintainers keep the marketplace entry version and description aligned with
 `.claude-plugin/plugin.json` and `VERSION`; `node scripts/validate.mjs` rejects
 drift. Local source validation is not a public release or marketplace acceptance.
 
+## Additional plugin formats
+
+Cursor metadata lives in `.cursor-plugin/plugin.json` and references the same
+eight skills. See [host plugin packaging](docs/plugins.md) for installation,
+runtime prerequisites, regeneration and the host acceptance checklist. A manifest
+is not proof of marketplace acceptance or end-to-end host compatibility.
+
 ## Native delivery and compatible CLI installation
 
 Version 2.1.1 extends the existing `benchmark-yylo` skill with frozen project/task
