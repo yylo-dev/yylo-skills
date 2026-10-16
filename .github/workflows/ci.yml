@@ -18,7 +18,7 @@ jobs:
           node-version: 22
       - name: Validate repository and invocation contracts
         run: node scripts/validate.mjs
-      - name: Test nested lifecycle regressions
-        run: node --test scripts/validate.test.mjs
+      - name: Test lifecycle and packaging regressions
+        run: node --test scripts/*.test.mjs
       - name: Verify skills CLI discovery
         run: npx --yes skills add . --list

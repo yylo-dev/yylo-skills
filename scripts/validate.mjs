@@ -202,4 +202,18 @@ const plugin = JSON.parse(fs.readFileSync(path.join(root, '.claude-plugin/plugin
 if (plugin.version !== fs.readFileSync(path.join(root, 'VERSION'), 'utf8').trim()) {
   throw new Error('plugin version must match VERSION');
 }
-console.log(`validated ${expected.length} canonical skills, nested lifecycle guidance and invocation contracts`);
+const marketplace = JSON.parse(fs.readFileSync(path.join(root, '.claude-plugin/marketplace.json'), 'utf8'));
+if (marketplace.name !== plugin.name || marketplace.owner?.name !== plugin.author.name
+    || marketplace.plugins?.length !== 1 || marketplace.plugins[0].source !== './') {
+  throw new Error('marketplace must expose exactly the canonical root plugin');
+}
+for (const field of ['name', 'version', 'description']) {
+  if (marketplace.plugins[0][field] !== plugin[field]) {
+    throw new Error(`marketplace ${field} must match plugin.json`);
+  }
+}
+// Root skills/ is discovered by Claude; overrides could silently hide skills.
+for (const field of ['skills', 'commands', 'agents', 'hooks', 'mcpServers', 'strict']) {
+  if (field in marketplace.plugins[0]) throw new Error(`unexpected marketplace component override: ${field}`);
+}
+console.log(`validated ${expected.length} canonical skills, marketplace metadata, nested lifecycle guidance and invocation contracts`);

@@ -33,6 +33,39 @@ npx skills add yylo-dev/yylo-skills --skill wiki-yylo
 
 Every canonical slug ends in `-yylo`, keeping selector prefixes useful: type `w` for wiki/workflow, `a` for artifacts, `p` for planning, `r` for the Ralph loop, or `u` for project understanding. Review skill instructions and scripts before installing them. Published versions use immutable `vMAJOR.MINOR.PATCH` tags; `VERSION` identifies the repository release represented by the default branch.
 
+## Claude Code plugin installation
+
+The repository also exposes one plugin containing all eight canonical skills:
+
+```bash
+claude plugin marketplace add yylo-dev/yylo-skills
+claude plugin install yylo-skills@yylo-skills
+```
+
+Restart Claude Code after installation. Skills are namespaced by the plugin;
+use Claude's skill discovery rather than assuming the unqualified names.
+To validate an unpublished checkout without changing your normal settings, use
+an isolated configuration directory and a local marketplace path:
+
+```bash
+export CLAUDE_CONFIG_DIR="$(mktemp -d)"
+claude plugin validate .
+claude plugin marketplace add "$PWD"
+claude plugin install yylo-skills@yylo-skills
+claude plugin list --json
+```
+
+Installation supplies instructions, **not the YYLO executables or a configured
+controller**. The four Ledger Record skills require a compatible `yylo-ledger`
+(or `yy ledger`); project planning/execution require YYLO CLI and its controller;
+`benchmark-yylo` requires YYLO Benchmark. Inspect installed command help before
+use. Installation never authorizes task execution, publication or deployment.
+Do not install another copy over customized skills; choose one acquisition route.
+
+Maintainers keep the marketplace entry version and description aligned with
+`.claude-plugin/plugin.json` and `VERSION`; `node scripts/validate.mjs` rejects
+drift. Local source validation is not a public release or marketplace acceptance.
+
 ## Native delivery and compatible CLI installation
 
 Version 2.1.1 extends the existing `benchmark-yylo` skill with frozen project/task
