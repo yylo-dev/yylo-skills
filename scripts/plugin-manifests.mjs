@@ -22,6 +22,17 @@ export function pluginManifests(root) {
   // cursor/plugins ac4e25a0064cd600afdd605208bad72748cb019a:
   // schemas/plugin.schema.json. Its author object disallows Claude's url field.
   return {
+    'plugin.json': {
+      $schema: 'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json',
+      name: plugin.name,
+      version,
+      description: plugin.description,
+      author: plugin.author,
+      homepage: plugin.author.url,
+      repository: plugin.repository,
+      license: plugin.license,
+      keywords: plugin.keywords,
+    },
     '.cursor-plugin/plugin.json': {
       name: plugin.name,
       version,

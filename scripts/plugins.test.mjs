@@ -25,7 +25,7 @@ for (const [name, mutate] of [
   test(`rejects Cursor ${name}`, () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'yylo-plugins-test-'));
     try {
-      for (const file of ['.claude-plugin', '.cursor-plugin', 'skills', 'skills-manifest.json', 'VERSION']) {
+      for (const file of ['.claude-plugin', 'skills', 'skills-manifest.json', 'VERSION', ...Object.keys(pluginManifests(source))]) {
         fs.cpSync(path.join(source, file), path.join(root, file), { recursive: true });
       }
       const file = path.join(root, '.cursor-plugin/plugin.json');

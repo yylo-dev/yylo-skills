@@ -24,3 +24,15 @@ jobs:
         run: node --test scripts/*.test.mjs
       - name: Verify skills CLI discovery
         run: npx --yes skills add . --list
+
+  nix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build portable package and check resource parity
+        run: |
+          docker run --rm -v "$PWD:/workspace:ro" \
+            -e 'NIX_CONFIG=experimental-features = nix-command flakes
+          sandbox = false' \
+            nixos/nix@sha256:e2bff159b88c242722022a273d3832a4392f01dba35b796204d852b89042526e \
+            sh -c 'nix flake check path:/workspace --no-update-lock-file -L'

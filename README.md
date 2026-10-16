@@ -68,8 +68,9 @@ drift. Local source validation is not a public release or marketplace acceptance
 
 ## Additional plugin formats
 
-Cursor metadata lives in `.cursor-plugin/plugin.json` and references the same
-eight skills. See [host plugin packaging](docs/plugins.md) for installation,
+Cursor metadata lives in `.cursor-plugin/plugin.json`; portable Hermes/Agent
+Plugins metadata lives in root `plugin.json`. The Nix flake builds the portable
+layout through `agent-pkgs`. All formats reference the same eight skills. See [host plugin packaging](docs/plugins.md) for installation,
 runtime prerequisites, regeneration and the host acceptance checklist. A manifest
 is not proof of marketplace acceptance or end-to-end host compatibility.
 
