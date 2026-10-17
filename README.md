@@ -71,7 +71,9 @@ drift. Local source validation is not a public release or marketplace acceptance
 Cursor metadata lives in `.cursor-plugin/plugin.json`; portable Hermes/Agent
 Plugins metadata lives in root `plugin.json`. The Nix flake builds the portable
 layout through `agent-pkgs`. DSH uses `package.json`'s bundle declaration and a
-small provider under `dsh/`. All formats reference the same eight skills. See [host plugin packaging](docs/plugins.md) for installation,
+small provider under `dsh/`. Grok Build has generated `.grok-plugin/plugin.json`
+metadata; **Grok Bot runtime compatibility remains unverified**. All formats
+reference the same eight skills. See [host plugin packaging](docs/plugins.md) for installation,
 runtime prerequisites, regeneration and the host acceptance checklist. A manifest
 is not proof of marketplace acceptance or end-to-end host compatibility.
 

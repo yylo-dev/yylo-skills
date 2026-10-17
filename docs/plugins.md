@@ -21,7 +21,9 @@ Claude metadata or skill inventory:
 
 ```bash
 node scripts/sync-plugins.mjs
+node scripts/sync-dsh.mjs
 node scripts/sync-plugins.mjs --check
+node scripts/sync-dsh.mjs --check
 node scripts/validate.mjs
 node --test scripts/*.test.mjs
 ```
@@ -138,6 +140,84 @@ The adapter preserves skill bodies verbatim after removing frontmatter; user
 request text remains owned by the host. It does not interpret `$ARGUMENTS` as
 shell code or add a custom argument-substitution protocol. Static and no-model
 host checks are not an end-to-end model-execution certification.
+
+## Grok Build and Grok Bot are separate acceptance targets
+
+`.grok-plugin/plugin.json` is generated from canonical YYLO metadata, with
+brand-scoped discovery keywords and the conventional `skills/` layout. There are
+no Grok-specific copies of skills and no new execution adapter. Current Grok
+Build prefers root `plugin.json`; `.grok-plugin/plugin.json` is a fallback also
+read by xAI's marketplace catalog tooling. Both carry the same identity/version.
+Cursor keeps its separately validated manifest; a Cursor install is not a Bot test.
+
+The reviewed upstream contracts are:
+
+- [Grok Build manifest loader](https://github.com/xai-org/grok-build/blob/2bdd1d6a6369de0e8c68132ea4539e9abd9e14a8/crates/codegen/xai-grok-agent/src/plugins/manifest.rs)
+- [Grok Build plugin guide](https://github.com/xai-org/grok-build/blob/2bdd1d6a6369de0e8c68132ea4539e9abd9e14a8/crates/codegen/xai-grok-pager/docs/user-guide/09-plugins.md)
+- [xAI marketplace](https://github.com/xai-org/plugin-marketplace/tree/ae879a177c95b129a375136f1e7b8cc2878cbfa5),
+  whose current README identifies it as a **Grok Build** catalog
+- [Grok Bot skills and routines](https://docs.x.ai/grok-bot/skills-routines-and-automations)
+
+After the source is public, Grok Build supports these explicit, trusted installs:
+
+```bash
+grok plugin install yylo-dev/yylo-skills --trust
+grok plugin enable yylo-skills
+grok inspect --json
+```
+
+For an unpublished checkout, use an isolated no-model smoke instead:
+
+```bash
+python3 scripts/smoke-grok.py --binary /absolute/path/to/reviewed/grok
+```
+
+The helper creates a new temporary home, removes inherited credentials, checks
+both manifest locations, installs/enables the fixture, discovers eight skills,
+compares every installed instruction/resource byte, then disables/uninstalls
+only that fixture. An unrelated user skill must survive. Evidence is retained at
+the printed temporary path. It can also check the pinned marketplace scanner:
+
+```bash
+# Download and review scripts/plugin_catalog.py at marketplace commit ae879a1…
+python3 scripts/smoke-grok.py --binary /path/to/grok --catalog-script /path/to/plugin_catalog.py
+```
+
+The helper verifies the scanner's exact SHA-256 before importing it. It neither
+submits an entry nor fetches a remote plugin source. Remote submission additionally
+requires a full, publicly reachable commit SHA, a regenerated component index,
+brand-specific keywords, license, and the venue's current review checks.
+
+### Verified scope and remaining gates (2026-10-17)
+
+Grok Build **0.1.220-alpha.4 (ae5f4af5321)** on macOS arm64 passed the no-model
+smoke and marketplace scanner check. The binary reports that build identifier;
+it is not asserted to be the same revision as the separately reviewed source.
+All eight skill bodies and their resources were preserved. This does **not** test
+model invocation, argument substitution, missing-runtime responses or cloud access.
+
+**Grok Bot is not runtime-verified.** Its current docs describe **Connect apps →
+Your plugins → Manage plugins and skills** and `/` skill selection, not a promise
+that every Grok Build package installs on a Bot. A Bot operator must separately
+confirm an authorized install route, discovery, reference loading, literal request
+handling and a disposable Ledger workflow on the Bot's computer. CLI/Ledger on a
+local laptop is not automatically available in that cloud environment. Do not
+create scheduled routines or grant extra permissions merely to install skills.
+
+The earlier campaign's family counts are not acceptance guarantees:
+
+| Venue | Remaining gate; no submission implied |
+| --- | --- |
+| `xai-org/plugin-marketplace` | Grok Build route: public pinned source + catalog generation/validation + review; not Bot certification. |
+| `ZeroPointRepo/awesome-grok-bot` | Its contribution rules explicitly exclude Build-only entries. Obtain genuine Bot evidence first. |
+| `0xNyk/awesome-grok-bot` | Historical host-scope/intake gate needs a fresh check after Bot evidence. |
+| `tiankonglan/awesome-grok-bot-template`, `divo12/awesome-grok-bot-templates`, `lroolle/awesome-grokbot-templates` | Template/team/share-link entry units: plugin metadata alone does not satisfy them. Recheck individually. |
+| `LinXiaoTao/awesome-grokbot`, `composio-community/awesome-grok-bots`, `kwakseongjae/awesome-grok-bot`, `daboluojiujiujiu/awesome-grok-bot` | Prior family-scoped records are not individual admission checks. Verify Bot fit, live format, duplication and external intake. |
+| `ralftester/awesome-grok-bot-pl` | Translation mirror: establish its contribution/sync policy; no independent venue assumption. |
+| `tommy-ca/grok-build-plugins` | Distinct Build catalog candidate; verify current intake and source/pinning rules rather than inheriting a Bot verdict. |
+
+Consult the campaign's existing repository index before reopening any terminal
+record. This package does not modify those records or authorize external outreach.
 
 ## Runtime and invocation requirements
 

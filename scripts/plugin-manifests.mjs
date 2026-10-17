@@ -33,6 +33,19 @@ export function pluginManifests(root) {
       license: plugin.license,
       keywords: plugin.keywords,
     },
+    // xai-org/grok-build PluginManifest accepts the Claude-style author.
+    // The marketplace catalog also reads this fallback; newer Build loaders
+    // prefer root plugin.json. Both use convention-based skills/ discovery.
+    '.grok-plugin/plugin.json': {
+      name: plugin.name,
+      version,
+      description: plugin.description,
+      author: plugin.author,
+      homepage: plugin.author.url,
+      repository: plugin.repository,
+      license: plugin.license,
+      keywords: ['yylo', 'yylo-skills', 'yylo-ledger'],
+    },
     '.cursor-plugin/plugin.json': {
       name: plugin.name,
       version,
