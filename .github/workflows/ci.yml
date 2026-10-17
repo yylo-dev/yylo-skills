@@ -20,10 +20,25 @@ jobs:
         run: node scripts/validate.mjs
       - name: Check generated platform manifests
         run: node scripts/sync-plugins.mjs --check
+      - name: Check DSH bundle metadata
+        run: node scripts/sync-dsh.mjs --check
       - name: Test lifecycle and packaging regressions
         run: node --test scripts/*.test.mjs
       - name: Verify skills CLI discovery
         run: npx --yes skills add . --list
+
+  dsh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Test the real DSH skill registry without a model
+        run: |
+          runtime="$(mktemp -d)"
+          npm install --prefix "$runtime" --ignore-scripts --no-audit --no-fund @deepseek-ai/dsh@0.2.0-rc.2
+          node scripts/smoke-dsh.mjs "$runtime"
 
   nix:
     runs-on: ubuntu-latest

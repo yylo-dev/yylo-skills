@@ -93,6 +93,52 @@ Commit its generated `source.json` and `default.nix` only. Keep installation
 checks enabled and disclose unresolved runtime prerequisites. The local flake
 is not itself a submitted upstream package.
 
+## DeepSeek Harness (DSH)
+
+The root `package.json` declares `dsh.bundle.patch`; `dsh/cordis.patch.yml`
+mounts the dependency-free `dsh/index.mjs` skill provider. It registers with
+`ctx.skills`, exposes all eight canonical bodies and resource directories, and
+lets Cordis remove the registration on unload. It installs no tools, UI, hooks,
+automatic execution loop or YYLO runtimes. Use a profile/preset with skill
+loading enabled; a minimal preset does not gain a skill tool from this bundle.
+
+After the reviewed source is public, install into an existing profile:
+
+```bash
+dsh plugin --profile web add github:yylo-dev/yylo-skills
+```
+
+For a local development check, with Node 22 and pnpm available:
+
+```bash
+node scripts/sync-dsh.mjs
+export DSH_HOME="$(mktemp -d)"
+dsh --profile yylo-test --from-default-profile web --dump-config
+# A local tarball exercises the distributable package, rather than a source link.
+npm pack --ignore-scripts --pack-destination "$DSH_HOME"
+dsh plugin --profile yylo-test add "$DSH_HOME"/yylo-skills-*.tgz
+dsh --profile yylo-test --dump-config
+```
+
+Be explicit about `DSH_HOME` even for profile-scoped help: some CLI versions
+initialize a profile before delegating `--help` to pnpm. Do not modify an existing
+user profile for smoke tests. The package is marked private to prevent accidental
+npm publication; Git and local tarball installation remain available.
+
+The minimum targeted DSH version is `0.2.0-rc.2`. Maintainers can exercise that
+version's real Cordis registry without a model request:
+
+```bash
+runtime="$(mktemp -d)"
+npm install --prefix "$runtime" --ignore-scripts --no-audit --no-fund @deepseek-ai/dsh@0.2.0-rc.2
+node scripts/smoke-dsh.mjs "$runtime"
+```
+
+The adapter preserves skill bodies verbatim after removing frontmatter; user
+request text remains owned by the host. It does not interpret `$ARGUMENTS` as
+shell code or add a custom argument-substitution protocol. Static and no-model
+host checks are not an end-to-end model-execution certification.
+
 ## Runtime and invocation requirements
 
 - Ledger skills: a compatible `yylo-ledger`, or `yy ledger` in its controller.

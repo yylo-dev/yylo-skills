@@ -1,0 +1,53 @@
+{
+  "name": "@yylo/skills",
+  "version": "2.1.1",
+  "private": true,
+  "description": "Reusable agent skills maintained by YYLO. The canonical, independently versioned source for skills used by YYLO CLI and YYLO Ledger: ledger task management, wiki, workflow and artifact records, project understanding, planning, benchmark studies, and the Ralph execution loop.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yylo-dev/yylo-skills.git"
+  },
+  "main": "./dsh/index.mjs",
+  "exports": {
+    ".": "./dsh/index.mjs",
+    "./package.json": "./package.json",
+    "./dsh/cordis.patch.yml": "./dsh/cordis.patch.yml"
+  },
+  "files": [
+    "dsh",
+    "skills",
+    "skills-manifest.json",
+    "plugin.json",
+    "VERSION",
+    "LICENSE",
+    "README.md",
+    "docs"
+  ],
+  "keywords": [
+    "skills",
+    "agent-skills",
+    "yylo",
+    "ledger",
+    "kanban",
+    "task-management",
+    "claude-code",
+    "codex",
+    "pi",
+    "dsh-plugin",
+    "deepseek-harness"
+  ],
+  "engines": {
+    "node": ">=22",
+    "dsh": ">=0.2.0-rc.2 <0.3.0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./dsh/cordis.patch.yml"
+    }
+  },
+  "scripts": {
+    "test": "node scripts/validate.mjs && node scripts/sync-plugins.mjs --check && node scripts/sync-dsh.mjs --check && node --test scripts/*.test.mjs"
+  }
+}
