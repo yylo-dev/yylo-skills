@@ -9,6 +9,7 @@ Reusable agent skills maintained by [YYLO](https://yylo.dev). This repository is
 [![Mentioned in Claude Skills Collection](https://awesome.re/mentioned-badge.svg)](https://github.com/abubakarsiddik31/claude-skills-collection)
 [![Mentioned in Awesome Skills](https://awesome.re/mentioned-badge.svg)](https://github.com/gmh5225/awesome-skills)
 [![Mentioned in SkillsAllYouNeed](https://awesome.re/mentioned-badge.svg)](https://github.com/kishormorol/SkillsAllYouNeed)
+[![Mentioned in KitFind](https://awesome.re/mentioned-badge.svg)](https://github.com/gliptak/kitfind)
 [![Featured in PM Skills Community](https://mohitagw15856.github.io/pm-claude-skills/assets/community-badge.svg)](https://github.com/mohitagw15856/pm-claude-skills/blob/main/COMMUNITY-SKILLS.md)
 
 ## Install
