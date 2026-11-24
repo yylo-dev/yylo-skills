@@ -79,6 +79,15 @@ is not proof of marketplace acceptance or end-to-end host compatibility.
 
 ## Native delivery and compatible CLI installation
 
+Version 2.1.2 documents CLI 0.2.16's opt-in post-merge worktree cleanup.
+`cleanup.after_merge` defaults to false; `YYLO_WORKTREE_CLEANUP_AFTER_MERGE=true`
+or `false` overrides it. Review eligible retained worktrees with
+`yy merge cleanup TASK_ID --dry-run`; explicit `--apply` requires cleanup authority.
+Only declared disposable dependency/build paths may be discarded. Dirty files,
+unknown ignored content, active ownership and initialized submodules preserve the
+worktree. Cleanup outcomes are separate from successful Git and Ledger delivery.
+Older installed CLIs must be upgraded before these commands are used.
+
 Version 2.1.1 extends the existing `benchmark-yylo` skill with frozen project/task
 checklists, evidence-based judgments, deterministic loss and reusable examples.
 It keeps skills in this dedicated repository rather than the Benchmark npm package.

@@ -154,6 +154,18 @@ Declare dependencies and relations directly in task body text:
 
 These are parsed automatically when the task is created/updated.
 
+### Delivered task worktree cleanup (CLI 0.2.16+)
+
+Preflight `yy merge cleanup --help` before using this surface on an older CLI.
+Preview one delivered task with `yy merge cleanup TASK_ID --dry-run`; `--apply`
+requires owner cleanup authority. For automatic cleanup, explicit owner opt-in
+sets `cleanup.after_merge: true` in the controller task-workspace policy;
+`YYLO_WORKTREE_CLEANUP_AFTER_MERGE=true|false` overrides it. The default is off.
+Declare only disposable dependency/build directories in `cleanup.disposable_paths`.
+Unknown ignored files, dirty work, active ownership and initialized submodules
+preserve the worktree. Inspect cleanup separately from Git/Ledger delivery and
+preserve skipped paths; never force deletion to turn a skip into success.
+
 ### Merge (Multi-Directory Consolidation)
 
 When tasks get scattered across subdirectories:
