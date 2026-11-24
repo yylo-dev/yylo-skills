@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packageId": "yylo-skills",
-  "sourceVersion": "2.1.1",
+  "sourceVersion": "2.1.2",
   "additionalSkills": "reject",
   "skills": {
     "artifact-yylo": {

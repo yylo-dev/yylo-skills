@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packageId": "yylo-skills",
-  "sourceVersion": "2.1.1",
+  "sourceVersion": "2.1.2",
   "evidenceDate": "2026-09-14",
   "prerequisites": "Review the canonical skill instructions. Use the open Skills CLI, compatible YYLO CLI, or standalone Ledger installer.",
   "releases": [
